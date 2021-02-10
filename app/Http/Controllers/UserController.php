@@ -61,7 +61,7 @@ class UserController extends Controller
         try {
             $request->session()->flush();
             Session::flush();
-            // echo "got to controller";
+            
             $userN = $request->input('username');
             $uPass = $request->input('password');
             $user = new User(null, null, null, null, $userN, $uPass);
@@ -69,6 +69,8 @@ class UserController extends Controller
 
             // user return
             $result = $ubs->UserLogin($user);
+            Session::put('userid', $result->getId());
+            Session::put('user', $result);
             if ($result != null) {
                     return view('home')->with('firstname', $result->getFirstName());
             } else {
@@ -114,6 +116,22 @@ class UserController extends Controller
             }else{
                 return view('register')->with('msg', "Failed to create account");
             }
+        } catch (Exception $e2) {
+            throw $e2;
+        }
+    }
+
+    /**
+     * flushes out session and sends to login page
+     *
+     * @return route(login)
+     */
+    public function Logout(Request $request)
+    {
+        try {
+            Session::flush();
+            $request->session()->flush();
+            return view("login");
         } catch (Exception $e2) {
             throw $e2;
         }

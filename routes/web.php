@@ -28,5 +28,7 @@
     Route::post('login', 'UserController@login');
     
     Route::post('register', 'UserController@register');
+    
+    Route::get('/logout', 'UserController@Logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
