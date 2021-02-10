@@ -13,7 +13,7 @@
 
 
 
-//Login routes
+//Login & register routes
 
     Route::get('/', function () {
         return view('login');
@@ -30,5 +30,9 @@
     Route::post('register', 'UserController@register');
     
     Route::get('/logout', 'UserController@Logout');
+    
+ //Homepage routes
 
-Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', function () {
+        return view('home');
+    });
