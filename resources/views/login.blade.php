@@ -17,11 +17,12 @@
 			<td><input type="text" name="password" maxlength="15"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" name="Login" /></td>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" name="Login" /></td>
 		</tr>
 	</table>
 </form>
 <br>
+	<a style="color: black;">Need a new account?</a>
 	<input type="button" class="btn btn-dark btn-lg" value="Register" onclick=" registerlink()">
 <script>
 //used to hyperlink with bootstrap button
