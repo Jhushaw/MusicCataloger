@@ -39,6 +39,9 @@
     });
             
     Route::post('addplaylist', 'PlaylistController@addPlaylist');
+   
+    Route::post('deletePlaylist', 'PlaylistController@deletePlaylist');
+    
     
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
     

@@ -16,6 +16,7 @@
 	<table border="1">
 			<th>Name</th>
 			<th>View Playlist</th>
+			<th>Delete Playlist</th>
 
 		@foreach ($playlists as $p)
 		<tr>
@@ -26,6 +27,13 @@
 						type="hidden" name="id" value="{{ $p['ID'] }}" /> <input
 						type="submit" class="btn btn-secondary btn-large"
 						value="View Playlist" />
+				</form></td>
+				
+				<td><form action="deletePlaylist" method="post">
+					<input type="hidden" name="_token" value="{{ csrf_token()}}" /> <input
+						type="hidden" name="id" value="{{ $p['ID'] }}" /> <input
+						type="submit" class="btn btn-secondary btn-large"
+						value="Delete Playlist" />
 				</form></td>
 		</tr>
 		@endforeach

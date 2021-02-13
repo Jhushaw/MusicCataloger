@@ -1,14 +1,7 @@
-
-<style>
-.footer
-{
-text-align: center;
-position: absolute;
-bottom: 0;
-width: 100%;
-}
-</style>
-
-<div class="footer">
-	<h5>Copyright @2020 My Company</h5>
-</div>
+<footer class="bg-light text-center text-lg-start">
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: white">
+    2020 Copyright: My Company
+  </div>
+  <!-- Copyright -->
+</footer>
