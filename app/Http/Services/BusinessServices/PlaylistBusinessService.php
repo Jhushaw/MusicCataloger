@@ -59,5 +59,17 @@ class PlaylistBusinessService
         return $result;
         
     }
+    
+    public function viewPlaylist($playlistID)
+    {
+        $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pbs = new PlaylistDataService($db);
+        
+        $result = $pds->viewPlaylist($playlistID);
+        $db=null;
+        
+        return $result;
+    }
 }
 
