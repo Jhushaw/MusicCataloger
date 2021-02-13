@@ -9,7 +9,7 @@
 	<h2>Create a Playlist</h2>
 	<table>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" name="Create Playlist" /></td>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" value ="Create Playlist" /></td>
 		</tr>
 	</table>
 </form>

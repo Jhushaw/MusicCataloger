@@ -29,7 +29,7 @@
 			<td><input type="text" name="password"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" name="register" /></td>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" value="Register" /></td>
 		</tr>
 	</table>
 	<br>

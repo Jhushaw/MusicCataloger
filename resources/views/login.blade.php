@@ -17,7 +17,7 @@
 			<td><input type="text" name="password" maxlength="15"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" name="Login" /></td>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" value="Login" /></td>
 		</tr>
 	</table>
 </form>

@@ -13,7 +13,7 @@
 			<td><input type="text" name="name" maxlength="45"/></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" name="Create" /></td>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" value="Create Playlist" /></td>
 		</tr>
 	</table>
 </form>
