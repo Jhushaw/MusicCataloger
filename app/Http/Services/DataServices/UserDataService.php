@@ -81,7 +81,7 @@ class UserDataService
         try {
             $usrnm = $user->getUsername();
             $psswd = $user->getPassword();
-            $eml=$user->getEmail();
+            $eml = $user->getEmail();
             $frstnm = $user->getFirstName();
             $lastnm = $user->getLastName();
             $stmt = $this->db->prepare("INSERT INTO `users` (`ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `FIRSTNAME`, `LASTNAME`)

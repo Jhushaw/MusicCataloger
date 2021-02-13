@@ -104,7 +104,6 @@ class UserController extends Controller
             $uFN = $request->input('firstName');
             $uLN = $request->input('lastName');
             $uEmail = $request->input('email');
-            // $cred = new Credential($userN, $uPass);
             $user = new User(null, $uFN, $uLN, $uEmail, $userN, $uPass);
             $ubs = new UserBusinessService();
             // returns bool
