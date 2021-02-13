@@ -42,6 +42,9 @@
     
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
     
+   //Song Routes
+    Route::get('songs', 'SongController@viewAllSongs');
+    
     
  //Homepage routes
 

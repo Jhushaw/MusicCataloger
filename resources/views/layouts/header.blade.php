@@ -7,7 +7,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Browse Music<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="songs">Browse Music<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="myplaylists">My Playlists<span class="sr-only">(current)</span></a>

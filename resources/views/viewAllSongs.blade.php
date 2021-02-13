@@ -1,45 +1,37 @@
-@extends('layouts.appmaster')
-
-@section('title','HomePage')
+@extends('layouts.appmaster') @section('title','HomePage')
 
 @section('content')
 <div class="containerfull">
-<form action="createplaylist" method="GET">
-	<input type="hidden" name="_token" value=" <?php echo csrf_token()?>" />
-	<h2>Create a Playlist</h2>
-	<table>
+	
+	@if(isset($songs))
+	<table border="1">
+			<th>Image</th>
+			<th>Name</th>
+			<th>Artist</th>
+
+		@foreach ($songs as $s)
 		<tr>
-			<td colspan="2" align="center"><input type="submit" class="btn btn-dark btn-lg" value ="Create Playlist" /></td>
+			<td><img
+			src="{{ $s['IMAGE']}}"
+			height="100" width="100"> </td>
+			<td>{{ $s['NAME']}}</td>
+			<td>{{ $s['ARTIST']}}</td>
+			
+
+<!-- 			<td><form action="viewPlaylist" method="post"> -->
+<!-- 					<input type="hidden" name="_token" value="{{ csrf_token()}}" /> <input -->
+<!-- 						type="hidden" name="id" value="{{ $s['ID'] }}" /> <input -->
+<!-- 						type="submit" class="btn btn-secondary btn-large" -->
+<!-- 						value="View Playlist" /> -->
+<!-- 				</form></td> -->
 		</tr>
 	</table>
-</form>
-
-<!-- 	<table id="UserTable" border="1"> -->
-<!-- 	<tr> -->
-<!-- 		<th>Name</th> -->
-<!-- 		<th>Location</th> -->
-<!-- 		<th>Company</th> -->
-<!-- 		<th>Requirements</th> -->
-<!-- 		<th>Description</th> -->
-<!-- 		<th>View Job</th> -->
-<!-- 	</tr> -->
-<!-- 	@foreach ($job as $j) -->
-<!-- 	<tr> -->
-<!-- 		<td>{{ $j['Name']}}</td> -->
-<!-- 		<td>{{ $j['Location']}}</td> -->
-<!-- 		<td>{{ $j['Company']}}</td> -->
-<!-- 		<td>{{ $j['Requirements']}}</td> -->
-<!-- 		<td>{{ $j['Description']}}</td> -->
-
-
-<!-- 		<td><form action="viewOtherJob" method="post"> -->
-<!-- 				<input type="hidden" name="_token" value="{{ csrf_token()}}" /> <input -->
-<!-- 					type="hidden" name="id" value="{{ $j['id'] }}" /> <input -->
-<!-- 					type="submit" class="btn btn-secondary btn-large" value="View Job" /> -->
-<!-- 			</form></td> -->
-<!-- 	</tr> -->
-<!-- 	@endforeach -->
-<!-- </table> -->
-<!-- @endif -->
+         @endforeach
+         @endif
+         <?php
+        if (isset($msg)) {
+            echo $msg;
+        }
+        ?>
 </div>
 @endsection

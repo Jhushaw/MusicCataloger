@@ -14,9 +14,8 @@
 	</form>
 	@if(isset($playlists))
 	<table border="1">
-		<tr>
-			<th>NAME</th>
-		</tr>
+			<th>Name</th>
+			<th>View Playlist</th>
 
 		@foreach ($playlists as $p)
 		<tr>
