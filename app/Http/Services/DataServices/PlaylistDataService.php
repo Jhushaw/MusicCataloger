@@ -47,6 +47,17 @@ class PlaylistDataService
             throw $e2;
         }
     }
+    
+    public function deletePlaylist($id)
+    {
+        try {
+            $stmt = $this->db->query("DELETE FROM `playlists` WHERE `id` = $id");
+            $result = $stmt->execute();
+            return $result;
+        } catch (Exception $e2) {
+            throw $e2;
+        }
+    }
 
     public function findAllPlaylists($userid)
     {

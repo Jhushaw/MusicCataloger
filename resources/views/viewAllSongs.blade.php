@@ -4,29 +4,30 @@
 <div class="containerfull">
 	
 	@if(isset($songs))
-	<table border="1">
-			<th>Image</th>
-			<th>Name</th>
-			<th>Artist</th>
-
-		@foreach ($songs as $s)
-		<tr>
-			<td><img
+                <!-- Fixed header table-->
+                <div class="table-responsive">
+                    <table class="table table-fixed">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="col-3">Image</th>
+                                <th scope="col" class="col-3">Name</th>
+                                <th scope="col" class="col-3">Artist</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($songs as $s)
+                            <tr>
+                                <th scope="row" class="col-3"><img
 			src="{{ $s['IMAGE']}}"
-			height="100" width="100"> </td>
-			<td>{{ $s['NAME']}}</td>
-			<td>{{ $s['ARTIST']}}</td>
-			
-
-<!-- 			<td><form action="viewPlaylist" method="post"> -->
-<!-- 					<input type="hidden" name="_token" value="{{ csrf_token()}}" /> <input -->
-<!-- 						type="hidden" name="id" value="{{ $s['ID'] }}" /> <input -->
-<!-- 						type="submit" class="btn btn-secondary btn-large" -->
-<!-- 						value="View Playlist" /> -->
-<!-- 				</form></td> -->
-		</tr>
-	</table>
-         @endforeach
+			height="100" width="100"> </th>
+                                <td class="col-3">{{ $s['NAME']}}</td>
+                                <td class="col-3">{{ $s['ARTIST']}}</td>
+                            </tr>
+                           @endforeach
+                        </tbody>
+                    </table>
+                </div><!-- End -->
+                
          @endif
          <?php
         if (isset($msg)) {

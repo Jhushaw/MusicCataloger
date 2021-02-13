@@ -11,7 +11,7 @@
     
     <style>
     body {
-         background-image: url("https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Colorful-Circle-Simple-Background-Image-1.jpg");
+         background-image: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
          background-repeat: no-repeat;
          background-size: cover;
          }
@@ -22,7 +22,7 @@
     border: 2px solid black;
     padding: 50px;
     width: 40%;
-    height: 80%;
+    height: 90%;
     }
     
     .footer{

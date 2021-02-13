@@ -26,6 +26,19 @@ class PlaylistController extends Controller
         }
     }
     
+    public function deletePlaylist(Request $request){
+        $id = $request->input('id');
+        
+        $pbs = new PlaylistBusinessService();
+        
+        $result = $pbs->deletePlaylist($id);
+        if ($result == true){
+            return $this->viewAllPlaylists();
+        }else{
+            return view('error')->with('msg', "Failed to create a Playlist");
+        }
+    }
+    
     public function viewAllPlaylists(){
         $pbs = new PlaylistBusinessService();
         $userid = Session::get('userid');

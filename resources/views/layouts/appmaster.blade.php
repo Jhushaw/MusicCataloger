@@ -11,7 +11,7 @@
     
     <style>
     body {
-         background-image: url("https://venngage-wordpress.s3.amazonaws.com/uploads/2018/09/Colorful-Circle-Simple-Background-Image-1.jpg");
+         background-image: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
          background-repeat: no-repeat;
          background-size: cover;
          }
@@ -22,7 +22,7 @@
     border: 2px solid black;
     padding: 50px;
     width: 40%;
-    height: 80%;
+    height: 90%;
     }
         .containerfull {
     border-radius: 25px;
@@ -30,14 +30,24 @@
     border: 2px solid black;
     padding: 50px;
     width: 90%;
-    height: 80%;
+    height: 100%;
     }
     
     .footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
     background:white;
     height:5%;
     width:100%;
     }
+    
+    .table-fixed tbody {
+    height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
     </style>
 </head>
 	
