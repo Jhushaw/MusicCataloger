@@ -31,6 +31,18 @@
     
     Route::get('/logout', 'UserController@Logout');
     
+    
+ //playlist routes
+ 
+    Route::get('/createplaylist', function () {
+        return view('createPlaylist');
+    });
+            
+    Route::post('addplaylist', 'PlaylistController@addPlaylist');
+    
+    Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
+    
+    
  //Homepage routes
 
     Route::get('/home', function () {

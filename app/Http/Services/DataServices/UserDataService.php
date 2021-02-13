@@ -40,7 +40,6 @@ class UserDataService
             $result = $stmt->rowCount();
             if ($result==1) {
                 $resultUser = $stmt->fetch(PDO::FETCH_OBJ);
-                //($id,$firstName, $lastName, $email, $username, $password, $phone, $dateOfBirth, $role, $suspension)
                 $returnedUser = new User($resultUser->ID,$resultUser->FIRSTNAME, $resultUser->LASTNAME, $resultUser->EMAIL, $resultUser->USERNAME
                     , $resultUser->PASSWORD);
                 return $returnedUser;

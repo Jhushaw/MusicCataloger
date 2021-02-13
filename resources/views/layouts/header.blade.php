@@ -10,7 +10,7 @@
         <a class="nav-link" href="#">Browse Music<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">My Playlists<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="myplaylists">My Playlists<span class="sr-only">(current)</span></a>
       </li>
             <li class="nav-item">
         <a class="nav-link" href="logout">Logout</a>

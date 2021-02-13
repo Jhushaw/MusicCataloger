@@ -24,6 +24,14 @@
     width: 40%;
     height: 80%;
     }
+        .containerfull {
+    border-radius: 25px;
+    background: white;
+    border: 2px solid black;
+    padding: 50px;
+    width: 90%;
+    height: 80%;
+    }
     
     .footer{
     background:white;
