@@ -69,9 +69,9 @@ class UserController extends Controller
 
             // user return
             $result = $ubs->UserLogin($user);
-            Session::put('userid', $result->getId());
-            Session::put('user', $result);
             if ($result != null) {
+                Session::put('userid', $result->getId());
+                Session::put('user', $result);
                     return view('home')->with('firstname', $result->getFirstName());
             } else {
                 // back to login with fail msg
