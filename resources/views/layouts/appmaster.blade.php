@@ -41,6 +41,13 @@
     height:5%;
     width:100%;
     }
+    
+    .table-fixed tbody {
+    height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+}
+
     </style>
 </head>
 	
