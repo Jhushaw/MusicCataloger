@@ -28,8 +28,9 @@
 						value="View Playlist" />
 				</form></td>
 		</tr>
+		@endforeach
 	</table>
-         @endforeach
+
          @endif
          <?php
         if (isset($msg)) {
