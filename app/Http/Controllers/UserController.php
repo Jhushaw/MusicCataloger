@@ -56,7 +56,7 @@ class UserController extends Controller
         try {
             $this->loginValidateForm($request);
         } catch (ValidationException $e1) {
-            return view('login')->with('msg', 'There was an error validating your data');
+            throw $e1;
         }
         try {
             $request->session()->flush();
@@ -95,7 +95,6 @@ class UserController extends Controller
         try {
             $this->registerValidateForm($request);
         } catch (ValidationException $e1) {
-            return view('register')->with('msg', 'There was an error validating your data');
             throw $e1;
         } try {
             // creates user model
