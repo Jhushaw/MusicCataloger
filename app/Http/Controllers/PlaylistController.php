@@ -84,7 +84,7 @@ class PlaylistController extends Controller
         if ($result == true){
             return $this->viewAllPlaylists();
         }else{
-            return view('error')->with('msg', "Failed to edit the Playlist");
+            return view('error')->with('msg', "Failed to edit the Playlist, make sure you actually changed something");
         }
     }
     
