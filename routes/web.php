@@ -49,13 +49,16 @@
     Route::post('viewPlaylist', 'PlaylistController@viewPlaylist');
     
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
+   
+    Route::post('addSong', 'PlaylistController@addSongToPlaylist');
     
-    Route::get('addToPlaylist', 'PlaylistController@addToPlaylist');
-    
+    Route::post('deleteSong', 'PlaylistController@deleteSong');
     
     
    //Song Routes
     Route::get('songs', 'SongController@viewAllSongs');
+    
+    Route::post('addToPlaylist', 'SongController@addToPlaylistView');
     
     
  //Homepage routes

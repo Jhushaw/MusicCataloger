@@ -116,23 +116,43 @@ class PlaylistController extends Controller
         $results = $pbs->viewPlaylist($playlistID);
         //make sure you got songs back.. return view accordingly
         if ($results != null){
-            return view('viewPlaylist')->with('playlists', $results);
+            return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistID);
         } else {
-            return view('viewPlaylist')->with('msg','You currently do not have any songs in this playlist.');
+            return view('viewPlaylist')->with('msg','You currently do not have any songs in this playlist.')->with('playlistid',$playlistID);
         }
     }
     
-    public function addToPlaylist(Request $request)
+    public function addSongToPlaylist(Request $request)
     {
         //get id from view, find all songs based on id.
-        $pbs = new PlaylistBusinessService();
-        $playlistID= $request->input('id');
-        $results = $pbs->addToPlaylist($playlistID,$songID);
+        $playlistID= $request->input('playlistid');
+        $songID = $request->input('songid');
         //make sure you got songs back.. return view accordingly
-        if ($results != null){
-            return view('myPlaylists')->with('playlists', $results);
+        $pbs = new PlaylistBusinessService();
+        $result1 = $pbs->addToPlaylist($playlistID, $songID);
+        
+        $results = $pbs->viewPlaylist($playlistID);
+        //return results accordingly
+        if ($results != null && $result1 != null){
+            return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistID);
         } else {
-            return view('myPlaylists')->with('msg','You currently do not have any playlists.');
+            return view('viewPlaylist')->with('msg','Failed to add song to the Playlist.')->with('playlistid',$playlistID);
+        }
+    }
+    
+    public function deleteSong(Request $request){
+        //get song id send to bs
+        $songid = $request->input('songid');
+        $playlistid = $request->input('playlistid');
+        $pbs = new PlaylistBusinessService();
+        $result1 = $pbs->deleteSong($songid);
+        
+        $results = $pbs->viewPlaylist($playlistid);
+        //check if Song was deleted.. return view accordingly
+        if ($results != null && $result1 == true){
+            return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistid);
+        } else {
+            return view('viewPlaylist')->with('msg','Failed to delete song from the Playlist.')->with('playlistid',$playlistid);
         }
     }
 }

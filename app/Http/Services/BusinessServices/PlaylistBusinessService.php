@@ -133,9 +133,26 @@ class PlaylistBusinessService
         
         $pds = new PlaylistDataService($db);
         
-        $pds->addToPlaylist($playlistId, $songId);
+        $results = $pds->addToPlaylist($playlistId, $songId);
         $db=null;
         
+        return $results;
+        
     }
+    
+    public function deleteSong($id){
+        //create connection
+        $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $pds = new PlaylistDataService($db);
+        //get result
+        $result = $pds->deleteSong($id);
+        $db = null;
+        //return result
+        return $result;
+        
+    }
+    
 }
 

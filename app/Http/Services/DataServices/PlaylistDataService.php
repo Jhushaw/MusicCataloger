@@ -137,7 +137,7 @@ class PlaylistDataService
     {
         try{
                 $int = (int)$playlistId;
-                $stmt = $this->db->query(" SELECT s.ID, s.NAME, s.ARTIST FROM songs s 
+                $stmt = $this->db->query(" SELECT s.IMAGE, s.ID, s.NAME, s.ARTIST FROM songs s 
                     Inner join playlistsong p on s.ID = p.Songs_ID
                      where p.playlists_ID = $int");
                 $stmt->execute();
@@ -173,6 +173,19 @@ class PlaylistDataService
                  throw $e2;
              }
              
+     }
+     
+     public function deleteSong($id)
+     {
+         try {
+             //delete song based on id
+             $stmt = $this->db->query("DELETE FROM `playlistsong` WHERE `songs_ID` = $id LIMIT 1");
+             $result = $stmt->execute();
+             //return bool if row was deleted
+             return $result;
+         } catch (Exception $e2) {
+             throw $e2;
+         }
      }
      
     

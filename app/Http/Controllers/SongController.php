@@ -5,6 +5,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\BusinessServices\SongBusinessService;
+use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
@@ -20,6 +21,21 @@ class SongController extends Controller
         //return results accordingly
         if ($results != null){
             return view('viewAllSongs')->with('songs', $results);
+        } else {
+            return view('viewAllSongs')->with('msg','You do not have any songs yet.');
+        }
+    }
+    
+    public function addToPlaylistView(Request $request)
+    {
+        //get id from view, find all songs based on id.
+        $playlistID= $request->input('id');
+        //make sure you got songs back.. return view accordingly
+        $sbs = new SongBusinessService();
+        $results = $sbs->findAllSongs();
+        //return results accordingly
+        if ($results != null){
+            return view('viewAllSongs')->with('songs', $results)->with('playlistid',$playlistID);
         } else {
             return view('viewAllSongs')->with('msg','You do not have any songs yet.');
         }
