@@ -79,9 +79,10 @@ class PlaylistDataService
     public function viewPlaylist($playlistId)
     {
         try{
-                $stmt = $this->db->query(" SELECT s.NAME, s.ARTIST FROM songs s" +
-                    " Inner join playlistsong p on s.ID = p.Songs_ID" +
-                    " where p.playlists_ID = $playlistId");
+            $int = (int)$playlistId;
+                $stmt = $this->db->query(" SELECT s.ID, s.NAME, s.ARTIST FROM songs s 
+                    Inner join playlistsong p on s.ID = p.Songs_ID
+                     where p.playlists_ID = $int");
                 $stmt->execute();
             
                 $result = $stmt->rowCount();
@@ -91,9 +92,9 @@ class PlaylistDataService
                 } else {
                     return null;
                 }
-                } catch (Exception $e2) {
-                    throw $e2;
-                }
+        } catch (Exception $e2) {
+            throw $e2;
+        }
                 
                
         }
