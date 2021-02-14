@@ -46,7 +46,13 @@
     
     Route::post('editplaylist', 'PlaylistController@editPlaylist');
     
+    Route::post('viewPlaylist', 'PlaylistController@viewPlaylist');
+    
+    
+    
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
+    
+    
     
    //Song Routes
     Route::get('songs', 'SongController@viewAllSongs');

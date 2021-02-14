@@ -71,4 +71,16 @@ class PlaylistController extends Controller
             return view('myPlaylists')->with('msg','You do not have any playlists yet.');
         }
     }
+    
+    public function viewPlaylist(Request $request)
+    {
+        $pbs = new PlaylistBusinessService();
+        $playlistID= $request->input('id');
+        $results = $pbs->viewPlaylist($playlistID);
+        if ($results != null){
+            return view('viewPlaylist')->with('playlists', $results);
+        } else {
+            return view('viewPlaylist')->with('msg','');
+        }
+    }
 }

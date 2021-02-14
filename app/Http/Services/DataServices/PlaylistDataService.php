@@ -97,5 +97,29 @@ class PlaylistDataService
             throw $e2;
         }
     }
+    
+    public function viewPlaylist($playlistId)
+    {
+        try{
+            $int = (int)$playlistId;
+                $stmt = $this->db->query(" SELECT s.ID, s.NAME, s.ARTIST FROM songs s 
+                    Inner join playlistsong p on s.ID = p.Songs_ID
+                     where p.playlists_ID = $int");
+                $stmt->execute();
+            
+                $result = $stmt->rowCount();
+                if ($result != 0) {
+                    $userResults = $stmt->fetchAll();
+                    return $userResults;
+                } else {
+                    return null;
+                }
+        } catch (Exception $e2) {
+            throw $e2;
+        }
+                
+               
+        }
+    
 }
 
