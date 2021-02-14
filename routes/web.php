@@ -50,6 +50,8 @@
     
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
     
+    Route::get('addToPlaylist', 'PlaylistController@addToPlaylist');
+    
     
     
    //Song Routes

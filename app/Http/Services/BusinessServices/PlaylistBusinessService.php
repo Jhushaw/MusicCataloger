@@ -124,5 +124,18 @@ class PlaylistBusinessService
         //return result
         return $result;
     }
+    
+    public function addToPlaylist($playlistId,$songId)
+    {
+        //create connection
+        $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $pds = new PlaylistDataService($db);
+        
+        $pds->addToPlaylist($playlistId, $songId);
+        $db=null;
+        
+    }
 }
 

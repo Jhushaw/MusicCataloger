@@ -136,7 +136,7 @@ class PlaylistDataService
     public function viewPlaylist($playlistId)
     {
         try{
-            $int = (int)$playlistId;
+                $int = (int)$playlistId;
                 $stmt = $this->db->query(" SELECT s.ID, s.NAME, s.ARTIST FROM songs s 
                     Inner join playlistsong p on s.ID = p.Songs_ID
                      where p.playlists_ID = $int");
@@ -151,10 +151,30 @@ class PlaylistDataService
                 }
         } catch (Exception $e2) {
             throw $e2;
-        }
-                
-               
-        }
+        }        
+     }
+     
+     public function addToPlaylist($playlistId,$songId)
+     {
+         try{
+             
+                 $playlistID = (int)$playlistId;
+                 $songID = (int)$songId;
+                 $stmt = $this->db->prepare("INSERT INTO `playlistsong`(`playlists_ID`, `songs_ID`) VALUES ($playlistID,$songID)");
+                 $stmt->execute();
+                 $result = $stmt->rowCount();
+                 //check if a row was affected
+                 if($result==1){
+                     return true;
+                 }else{
+                     return false;
+                 }
+             } catch (Exception $e2) {
+                 throw $e2;
+             }
+             
+     }
+     
     
 }
 

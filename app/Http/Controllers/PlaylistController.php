@@ -121,4 +121,18 @@ class PlaylistController extends Controller
             return view('viewPlaylist')->with('msg','You currently do not have any songs in this playlist.');
         }
     }
+    
+    public function addToPlaylist(Request $request)
+    {
+        //get id from view, find all songs based on id.
+        $pbs = new PlaylistBusinessService();
+        $playlistID= $request->input('id');
+        $results = $pbs->addToPlaylist($playlistID,$songID);
+        //make sure you got songs back.. return view accordingly
+        if ($results != null){
+            return view('myPlaylists')->with('playlists', $results);
+        } else {
+            return view('myPlaylists')->with('msg','You currently do not have any playlists.');
+        }
+    }
 }
