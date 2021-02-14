@@ -80,7 +80,7 @@ class PlaylistController extends Controller
         if ($results != null){
             return view('viewPlaylist')->with('playlists', $results);
         } else {
-            return view('viewPlaylist')->with('msg','');
+            return view('viewPlaylist')->with('msg','You currently do not have any songs in this playlist.');
         }
     }
 }

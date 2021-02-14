@@ -48,8 +48,6 @@
     
     Route::post('viewPlaylist', 'PlaylistController@viewPlaylist');
     
-    
-    
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
     
     
