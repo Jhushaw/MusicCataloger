@@ -31,13 +31,17 @@ class UserDataService
      */
     public function findUser(User $user){
         try {
+            //get credentials form user object
             $username = $user->getUsername();
             $password = $user->getPassword();
             
+            //select all where username & password = credentials
             $stmt = $this->db->query("SELECT * FROM `users` WHERE `USERNAME` = '$username' AND `PASSWORD` = '$password' LIMIT 1");
-            
+
             $stmt->execute();
             $result = $stmt->rowCount();
+            
+            //check if user was found, create new user and return it
             if ($result==1) {
                 $resultUser = $stmt->fetch(PDO::FETCH_OBJ);
                 $returnedUser = new User($resultUser->ID,$resultUser->FIRSTNAME, $resultUser->LASTNAME, $resultUser->EMAIL, $resultUser->USERNAME
@@ -51,11 +55,19 @@ class UserDataService
         }
     }
     
+    /**
+     * used to ensure multiple same users are not added to user table
+     * @param User $username
+     * @throws Exception
+     * @return \App\Http\Models\User|boolean
+     */
     public function findUserByName($username){
         try {
+            //find all users where username = $username
             $stmt = $this->db->query("SELECT * FROM `users` WHERE `USERNAME` = '$username' LIMIT 1");
             $stmt->execute();
             $result = $stmt->rowCount();
+            //if user was found, return that user
             if ($result == 1) {
                 $resultUser = $stmt->fetch(PDO::FETCH_OBJ);
                 //($id,$firstName, $lastName, $email, $username, $password, $phone, $dateOfBirth, $role, $suspension)
@@ -79,15 +91,18 @@ class UserDataService
      */
     public function createUser(User $user){
         try {
+            //get all user info
             $usrnm = $user->getUsername();
             $psswd = $user->getPassword();
             $eml = $user->getEmail();
             $frstnm = $user->getFirstName();
             $lastnm = $user->getLastName();
+            //insert user to user table
             $stmt = $this->db->prepare("INSERT INTO `users` (`ID`, `USERNAME`, `PASSWORD`, `EMAIL`, `FIRSTNAME`, `LASTNAME`)
              VALUES (NULL, '$usrnm', '$psswd', '$eml', '$frstnm', '$lastnm');");
             $stmt->execute();
             $result = $stmt->rowCount();
+            //check if a row was affected
             if($result==1){
                 return true;
             }else{

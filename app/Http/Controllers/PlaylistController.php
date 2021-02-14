@@ -11,14 +11,22 @@ use App\Http\Services\BusinessServices\PlaylistBusinessService;
 class PlaylistController extends Controller
 {
 
+    /**
+     * Gets name and userid and returns all playlists with new playlist added.
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function addPlaylist(Request $request){
+        //grab fields from view
         $name = $request->input('name');
         $userid = Session::get('userid');
+        
+        //send playlist to business service
         $playlist = new Playlist(null, $name, $userid);
-        
         $pbs = new PlaylistBusinessService();
-        
         $result = $pbs->createPlaylist($playlist);
+        
+        //check if playlist was added or not.. return view accordingly
         if ($result == true){
             return $this->viewAllPlaylists();
         }else{
@@ -26,12 +34,17 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * recieve playlist id, send to be deleted
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function deletePlaylist(Request $request){
+        //get playlist id send to bs
         $id = $request->input('id');
-        
-        $pbs = new PlaylistBusinessService();
-        
+        $pbs = new PlaylistBusinessService();  
         $result = $pbs->deletePlaylist($id);
+        //check if playlist was deleted.. return view accordingly
         if ($result == true){
             return $this->viewAllPlaylists();
         }else{
@@ -39,21 +52,35 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * get Id and name from myPlaylists page, send to editPlaylist page
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function editPlaylistView(Request $request){
+        //get id and name
         $id = $request->input('id');
         $name = $request->input('name');
         $playlist = New Playlist($id, $name, null);
+        //send playlist to edit page
         return view('editPlaylist')->with('playlist', $playlist);
     }
     
+    /**
+     * get fields from view, send to be edited
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function editPlaylist(Request $request){
+        //get fields.. create playlist
         $id = $request->input('id');
         $name = $request->input('name');
         $playlist = New Playlist($id, $name, null);
         
         $pbs = new PlaylistBusinessService();
-        
+        //send playlist down to be edited
         $result = $pbs->editPlaylist($playlist);
+        //check if playlist was edited.. return view accordingly
         if ($result == true){
             return $this->viewAllPlaylists();
         }else{
@@ -61,6 +88,10 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * find all playlists based on logged in user
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function viewAllPlaylists(){
         $pbs = new PlaylistBusinessService();
         $userid = Session::get('userid');
@@ -72,11 +103,18 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * view a single playlist
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function viewPlaylist(Request $request)
     {
+        //get id from view, find all songs based on id.
         $pbs = new PlaylistBusinessService();
         $playlistID= $request->input('id');
         $results = $pbs->viewPlaylist($playlistID);
+        //make sure you got songs back.. return view accordingly
         if ($results != null){
             return view('viewPlaylist')->with('playlists', $results);
         } else {

@@ -11,7 +11,6 @@ use App\Http\Services\DataServices\UserDataService;
 
 class UserBusinessService
 {
-    //user data service
     private $uds;
     private $servername;
     private $port;

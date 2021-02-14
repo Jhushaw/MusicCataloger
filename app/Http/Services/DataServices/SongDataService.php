@@ -22,13 +22,19 @@ class SongDataService
         $this->db = $db;
     }
 
-
+    /**
+     * find all songs from song table
+     * @throws Exception
+     * @return array|NULL
+     */
     public function findAllSongs()
     {
         try {
+            //select all songs
             $stmt = $this->db->query("SELECT * FROM `songs`");
             $stmt->execute();
             $result = $stmt->rowCount();
+            //check if i found anything, return them
             if ($result != 0) {
                 $userResults = $stmt->fetchAll();
                 return $userResults;

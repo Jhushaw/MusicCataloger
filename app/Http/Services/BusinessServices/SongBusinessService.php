@@ -9,7 +9,6 @@ use App\Http\Services\DataServices\SongDataService;
 
 class SongBusinessService
 {
-    //user data service
     private $uds;
     private $servername;
     private $port;
@@ -29,6 +28,10 @@ class SongBusinessService
         $this->dbname=config("database.connections.mysql.database");
     }
     
+    /**
+     * request all songs from dao
+     * @return NULL|array
+     */
     public function findAllSongs(){
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

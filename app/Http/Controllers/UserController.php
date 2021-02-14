@@ -50,6 +50,13 @@ class UserController extends Controller
         $this->validate($request, $rules);
     }
 
+    /**
+     * Logs user in, set up session, send login credentials to dao
+     * @param Request $request
+     * @throws ValidationException
+     * @throws Exception
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function Login(Request $request)
     {
         // trys to validate throws validation error if failed rules
@@ -59,20 +66,23 @@ class UserController extends Controller
             throw $e1;
         }
         try {
+            //flush session
             $request->session()->flush();
             Session::flush();
             
+            //get fields from view
             $userN = $request->input('username');
             $uPass = $request->input('password');
             $user = new User(null, null, null, null, $userN, $uPass);
             $ubs = new UserBusinessService();
 
-            // user return
+            //check if found user
             $result = $ubs->UserLogin($user);
             if ($result != null) {
+                //put user into session, return home
                 Session::put('userid', $result->getId());
                 Session::put('user', $result);
-                    return view('home')->with('firstname', $result->getFirstName());
+                    return view('home');
             } else {
                 // back to login with fail msg
                 return view('login')->with('msg', 'Login failed please try again');
@@ -83,7 +93,7 @@ class UserController extends Controller
     }
 
     /**
-     * Processes post requests from register.php form
+     * Register new user, send post request fields to dao
      *
      * @param
      * Request
