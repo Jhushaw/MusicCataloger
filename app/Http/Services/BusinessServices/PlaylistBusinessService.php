@@ -152,14 +152,14 @@ class PlaylistBusinessService
      * @param Song $id
      * @return boolean
      */
-    public function deleteSong($id){
+    public function deleteSong($id,$playlistid){
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $pds = new PlaylistDataService($db);
         //get result
-        $result = $pds->deleteSong($id);
+        $result = $pds->deleteSong($id,$playlistid);
         $db = null;
         //return result
         return $result;

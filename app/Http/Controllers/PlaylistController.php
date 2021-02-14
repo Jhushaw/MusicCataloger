@@ -156,7 +156,7 @@ class PlaylistController extends Controller
         $playlistid = $request->input('playlistid');
         $pbs = new PlaylistBusinessService();
         //delete song
-        $result1 = $pbs->deleteSong($songid);
+        $result1 = $pbs->deleteSong($songid, $playlistid);
         
         $results = $pbs->viewPlaylist($playlistid);
         //check if Song was deleted.. return view accordingly

@@ -194,11 +194,11 @@ class PlaylistDataService
      * @throws Exception
      * @return boolean
      */
-    public function deleteSong($id)
+    public function deleteSong($id,$playlistid)
     {
         try {
             // delete song based on id
-            $stmt = $this->db->query("DELETE FROM `playlistsong` WHERE `songs_ID` = $id LIMIT 1");
+            $stmt = $this->db->query("DELETE FROM `playlistsong` WHERE `songs_ID` = $id AND `playlists_ID` = $playlistid LIMIT 1");
             $result = $stmt->execute();
             // return bool if row was deleted
             return $result;
