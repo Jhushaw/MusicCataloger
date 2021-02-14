@@ -26,14 +26,19 @@ class SongController extends Controller
         }
     }
     
+    /**
+     * redirect to viewAllSongs with playlist id 
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function addToPlaylistView(Request $request)
     {
-        //get id from view, find all songs based on id.
-        $playlistID= $request->input('id');
-        //make sure you got songs back.. return view accordingly
+        //get playlist id
+        $playlistID = $request->input('id');
+        //find all songs 
         $sbs = new SongBusinessService();
         $results = $sbs->findAllSongs();
-        //return results accordingly
+        //return results accordingly with playlistid
         if ($results != null){
             return view('viewAllSongs')->with('songs', $results)->with('playlistid',$playlistID);
         } else {

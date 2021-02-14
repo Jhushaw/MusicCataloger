@@ -8,6 +8,7 @@ use PDO;
 use App\Http\Models\Playlist;
 use App\Http\Services\DataServices\PlaylistDataService;
 use App\Http\Models\User;
+use App\Http\Models\Song;
 
 class PlaylistBusinessService
 {
@@ -125,6 +126,12 @@ class PlaylistBusinessService
         return $result;
     }
     
+    /**
+     * sends playlist and song id down to dao to be added to playlistsong table
+     * @param Playlist $playlistId
+     * @param Song $songId
+     * @return boolean
+     */
     public function addToPlaylist($playlistId,$songId)
     {
         //create connection
@@ -132,14 +139,19 @@ class PlaylistBusinessService
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $pds = new PlaylistDataService($db);
-        
+        //send ids to dao
         $results = $pds->addToPlaylist($playlistId, $songId);
         $db=null;
-        
+        //return boolean results
         return $results;
         
     }
     
+    /**
+     * send song id down to dao to be deleted from playlistsong table
+     * @param Song $id
+     * @return boolean
+     */
     public function deleteSong($id){
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);

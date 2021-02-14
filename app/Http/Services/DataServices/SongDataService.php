@@ -5,7 +5,6 @@
 namespace App\Http\Services\DataServices;
 
 use Exception;
-use PDO;
 
 class SongDataService
 {

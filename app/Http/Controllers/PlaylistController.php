@@ -122,12 +122,17 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * 
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function addSongToPlaylist(Request $request)
     {
-        //get id from view, find all songs based on id.
+        //get ids from view, send down to bs and dao to add to playlistsong table
         $playlistID= $request->input('playlistid');
         $songID = $request->input('songid');
-        //make sure you got songs back.. return view accordingly
+        //make sure song was added as well as got all songs for viewPlaylist
         $pbs = new PlaylistBusinessService();
         $result1 = $pbs->addToPlaylist($playlistID, $songID);
         
@@ -140,11 +145,17 @@ class PlaylistController extends Controller
         }
     }
     
+    /**
+     * sends songid down to dao to be deleted
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
     public function deleteSong(Request $request){
-        //get song id send to bs
+        //get song and playlist id send to bs
         $songid = $request->input('songid');
         $playlistid = $request->input('playlistid');
         $pbs = new PlaylistBusinessService();
+        //delete song
         $result1 = $pbs->deleteSong($songid);
         
         $results = $pbs->viewPlaylist($playlistid);
