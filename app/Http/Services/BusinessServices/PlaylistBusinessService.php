@@ -64,6 +64,20 @@ class PlaylistBusinessService
         
     }
     
+    public function editPlaylist(Playlist $playlist){
+        //create connection, (best to create connection in business for atomic database transactions)
+        $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $pds = new PlaylistDataService($db);
+        
+        $result = $pds->updatePlaylist($playlist);
+        $db = null;
+        
+        return $result;
+        
+    }
+    
     public function findAllPlaylists($userid){
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

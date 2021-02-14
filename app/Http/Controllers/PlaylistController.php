@@ -20,7 +20,7 @@ class PlaylistController extends Controller
         
         $result = $pbs->createPlaylist($playlist);
         if ($result == true){
-            return view('createPlaylist')->with('msg', 'Sucessfully created a Playlist');
+            return $this->viewAllPlaylists();
         }else{
             return view('createPlaylist')->with('msg', "Failed to create a Playlist");
         }
@@ -36,6 +36,28 @@ class PlaylistController extends Controller
             return $this->viewAllPlaylists();
         }else{
             return view('error')->with('msg', "Failed to create a Playlist");
+        }
+    }
+    
+    public function editPlaylistView(Request $request){
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $playlist = New Playlist($id, $name, null);
+        return view('editPlaylist')->with('playlist', $playlist);
+    }
+    
+    public function editPlaylist(Request $request){
+        $id = $request->input('id');
+        $name = $request->input('name');
+        $playlist = New Playlist($id, $name, null);
+        
+        $pbs = new PlaylistBusinessService();
+        
+        $result = $pbs->editPlaylist($playlist);
+        if ($result == true){
+            return $this->viewAllPlaylists();
+        }else{
+            return view('error')->with('msg', "Failed to edit the Playlist");
         }
     }
     

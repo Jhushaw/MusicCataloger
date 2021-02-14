@@ -58,6 +58,28 @@ class PlaylistDataService
             throw $e2;
         }
     }
+    
+    public function updatePlaylist(Playlist $playlist)
+    {
+        try {
+            $stmt = $this->db->prepare("UPDATE playlists SET NAME = :name WHERE ID = :id");
+            $id = $playlist->getId();
+            $name = $playlist->getName();
+            
+            $stmt->bindParam(':id', $id ,PDO::PARAM_INT);
+            $stmt->bindParam(':name', $name);
+            
+            $stmt->execute();
+            $result = $stmt->rowCount();
+            if ($result == 1){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $e2) {
+            throw $e2;
+        }
+    }
 
     public function findAllPlaylists($userid)
     {

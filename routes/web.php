@@ -42,6 +42,9 @@
    
     Route::post('deletePlaylist', 'PlaylistController@deletePlaylist');
     
+    Route::post('editPlaylistView', 'PlaylistController@editPlaylistView');
+    
+    Route::post('editplaylist', 'PlaylistController@editPlaylist');
     
     Route::get('myplaylists', 'PlaylistController@viewAllPlaylists');
     

@@ -15,7 +15,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($songs as $s)
+						@foreach ($songs as $s)
                             <tr>
                                 <th scope="row" class="col-3"><img
 			src="{{ $s['IMAGE']}}"
@@ -23,8 +23,9 @@
                                 <td class="col-3">{{ $s['NAME']}}</td>
                                 <td class="col-3">{{ $s['ARTIST']}}</td>
                             </tr>
-                           @endforeach
+                   		@endforeach   
                         </tbody>
+
                     </table>
                 </div><!-- End -->
                 
