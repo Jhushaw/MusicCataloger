@@ -190,7 +190,7 @@ class PlaylistDataService
 
     /**
      * deletes a song from playlistsong table (remove song from a playlist)
-     * @param Song $id
+     * @param Song $id, Playlist $playlistid
      * @throws Exception
      * @return boolean
      */

@@ -162,6 +162,8 @@ class PlaylistController extends Controller
         //check if Song was deleted.. return view accordingly
         if ($results != null && $result1 == true){
             return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistid);
+        } else if ($result1 == true){
+            return view('viewPlaylist')->with('msg','you do not have any songs in this playlist.')->with('playlistid',$playlistid);
         } else {
             return view('viewPlaylist')->with('msg','Failed to delete song from the Playlist.')->with('playlistid',$playlistid);
         }
