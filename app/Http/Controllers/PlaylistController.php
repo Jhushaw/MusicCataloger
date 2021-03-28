@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Http\Models\Playlist;
 use App\Http\Services\BusinessServices\PlaylistBusinessService;
+use App\Http\Services\Utility\MyLogger;
 class PlaylistController extends Controller
 {
 
@@ -17,6 +18,7 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addPlaylist(Request $request){
+        MyLogger::info("Entering addPlaylist() in the Playlist controller");
         //grab fields from view
         $name = $request->input('name');
         $userid = Session::get('userid');
@@ -28,8 +30,10 @@ class PlaylistController extends Controller
         
         //check if playlist was added or not.. return view accordingly
         if ($result == true){
+            MyLogger::info("Playlist ".$name. " was successfully added");
             return $this->viewAllPlaylists();
         }else{
+            MyLogger::error("Playlist could not be created, exiting addPlaylist()");
             return view('createPlaylist')->with('msg', "Failed to create a Playlist");
         }
     }
@@ -40,15 +44,18 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deletePlaylist(Request $request){
+        MyLogger::info("Entering deletePalylist() in the playlist controller");
         //get playlist id send to bs
         $id = $request->input('id');
         $pbs = new PlaylistBusinessService();  
         $result = $pbs->deletePlaylist($id);
         //check if playlist was deleted.. return view accordingly
         if ($result == true){
+            MyLogger::info("Playlist with ID: ".$id. " successfully deleted, exiting deletePlaylist()");
             return $this->viewAllPlaylists();
         }else{
-            return view('error')->with('msg', "Failed to create a Playlist");
+            MyLogger::error("Playlist with ID: ".$id. " could not be deleted, exiting deletePlaylist()");
+            return view('error')->with('msg', "Failed to delete a Playlist");
         }
     }
     
@@ -58,11 +65,13 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPlaylistView(Request $request){
+        MyLogger::info("Entering editPlaylistView() in the playlist controller");
         //get id and name
         $id = $request->input('id');
         $name = $request->input('name');
         $playlist = New Playlist($id, $name, null);
         //send playlist to edit page
+        MyLogger::info("Exiting editPlaylistView() in the playlist controller");
         return view('editPlaylist')->with('playlist', $playlist);
     }
     
@@ -72,6 +81,7 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function editPlaylist(Request $request){
+        MyLogger::info("Entering editPlaylist() in the playlist controller");
         //get fields.. create playlist
         $id = $request->input('id');
         $name = $request->input('name');
@@ -82,8 +92,10 @@ class PlaylistController extends Controller
         $result = $pbs->editPlaylist($playlist);
         //check if playlist was edited.. return view accordingly
         if ($result == true){
+            MyLogger::info($name. " successfully edited, exiting editPlaylist()");
             return $this->viewAllPlaylists();
         }else{
+            MyLogger::warning($name. " not successfully edited, exiting editPlaylist()");
             return view('error')->with('msg', "Failed to edit the Playlist, make sure you actually changed something");
         }
     }
@@ -93,12 +105,15 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function viewAllPlaylists(){
+        MyLogger::info("Entering viewAllPlaylists() in the playlist controller");
         $pbs = new PlaylistBusinessService();
         $userid = Session::get('userid');
         $results = $pbs->findAllPlaylists($userid);
         if ($results != null){
+            MyLogger::info("Playlists successfully returned, exiting viewAllPlaylists()");
             return view('myPlaylists')->with('playlists', $results);
         } else {
+            MyLogger::warning("There are no playlist for this user in the database, exiting viewAllPlaylists()");
             return view('myPlaylists')->with('msg','You do not have any playlists yet.');
         }
     }
@@ -110,12 +125,14 @@ class PlaylistController extends Controller
      */
     public function viewPlaylist(Request $request)
     {
+        MyLogger::info("Entering viewPlaylist() in the playlist controller");
         //get id from view, find all songs based on id.
         $pbs = new PlaylistBusinessService();
         $playlistID= $request->input('id');
         $results = $pbs->viewPlaylist($playlistID);
         //make sure you got songs back.. return view accordingly
         if ($results != null){
+            MyLogger::info("Playlists successfully displayed, exiting viewPlaylist()");
             return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistID);
         } else {
             return view('viewPlaylist')->with('msg','You currently do not have any songs in this playlist.')->with('playlistid',$playlistID);
@@ -129,6 +146,7 @@ class PlaylistController extends Controller
      */
     public function addSongToPlaylist(Request $request)
     {
+        MyLogger::info("Entering addSongToPlaylist() in the playlist controller");
         //get ids from view, send down to bs and dao to add to playlistsong table
         $playlistID= $request->input('playlistid');
         $songID = $request->input('songid');
@@ -139,8 +157,10 @@ class PlaylistController extends Controller
         $results = $pbs->viewPlaylist($playlistID);
         //return results accordingly
         if ($results != null && $result1 != null){
+            MyLogger::info("Song successfully added, exiting addSongToPlaylist()");
             return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistID);
         } else {
+            MyLogger::error("Failed to add the song to the playlist, exiting addSongToPlaylist()");
             return view('viewPlaylist')->with('msg','Failed to add song to the Playlist.')->with('playlistid',$playlistID);
         }
     }
@@ -151,6 +171,7 @@ class PlaylistController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteSong(Request $request){
+        MyLogger::info("Entering deleteSong() in the playlist controller");
         //get song and playlist id send to bs
         $songid = $request->input('songid');
         $playlistid = $request->input('playlistid');
@@ -161,10 +182,12 @@ class PlaylistController extends Controller
         $results = $pbs->viewPlaylist($playlistid);
         //check if Song was deleted.. return view accordingly
         if ($results != null && $result1 == true){
+            MyLogger::info("Song successfully deleted, exiting deleteSong()");
             return view('viewPlaylist')->with('songs', $results)->with('playlistid',$playlistid);
         } else if ($result1 == true){
             return view('viewPlaylist')->with('msg','you do not have any songs in this playlist.')->with('playlistid',$playlistid);
         } else {
+            MyLogger::error("Failed to delete the song from the playlist, exiting deleteSong()");
             return view('viewPlaylist')->with('msg','Failed to delete song from the Playlist.')->with('playlistid',$playlistid);
         }
     }

@@ -9,6 +9,7 @@ use PDO;
 use App\Http\Models\Playlist;
 use App\Http\Models\User;
 use App\Http\Models\Song;
+use App\Http\Services\Utility\MyLogger;
 
 class PlaylistDataService
 {
@@ -33,6 +34,7 @@ class PlaylistDataService
      */
     public function createPlaylist(Playlist $playlist)
     {
+        MyLogger::info("Entering createPlaylist() in the Playlist data service");
         try {
             // get required data to be inserted
             $name = $playlist->getName();
@@ -44,6 +46,7 @@ class PlaylistDataService
             $result = $stmt->rowCount();
             // check rows affected
             if ($result == 1) {
+                MyLogger::info("Playlist successfully created, exiting, createPlaylist()");
                 return true;
             } else {
                 return false;
@@ -62,11 +65,13 @@ class PlaylistDataService
      */
     public function deletePlaylist($id)
     {
+        MyLogger::info("Entering deletePlaylist() in the Playlist data service");
         try {
             // delete playlist based on id
             $stmt = $this->db->query("DELETE FROM `playlists` WHERE `id` = $id");
             $result = $stmt->execute();
             // return bool if row was deleted
+            MyLogger::info("Playlist successfully deleted, exiting, deletePlaylist()");
             return $result;
         } catch (Exception $e2) {
             throw $e2;
@@ -82,6 +87,7 @@ class PlaylistDataService
      */
     public function updatePlaylist(Playlist $playlist)
     {
+        MyLogger::info("Entering updatePlaylist() in the Playlist data service");
         try {
             // update playlist based on param playlist
             $stmt = $this->db->prepare("UPDATE playlists SET NAME = :name WHERE ID = :id");
@@ -95,8 +101,10 @@ class PlaylistDataService
             // check rows affected
             $result = $stmt->rowCount();
             if ($result == 1) {
+                MyLogger::info("Playlist successfully updated, exiting, updatePlaylist()");
                 return true;
             } else {
+                MyLogger::warning("Playlist not successfully updated, exiting, updatePlaylist()");
                 return false;
             }
         } catch (Exception $e2) {
@@ -113,6 +121,7 @@ class PlaylistDataService
      */
     public function findAllPlaylists($userid)
     {
+        MyLogger::info("Entering findAllPlaylists() in the Playlist data service");
         try {
             // find all playlists based on userid
             $stmt = $this->db->query("SELECT * FROM `playlists` WHERE `users_ID` = '$userid'");
@@ -122,8 +131,10 @@ class PlaylistDataService
             if ($result != 0) {
                 $userResults = $stmt->fetchAll();
                 // return results
+                MyLogger::info("Playlists found, exiting findAllPlaylists()");
                 return $userResults;
             } else {
+                MyLogger::warning("No Playlists found, exiting findAllPlaylists()");
                 return null;
             }
         } catch (Exception $e2) {
@@ -140,6 +151,7 @@ class PlaylistDataService
      */
     public function viewPlaylist($playlistId)
     {
+        MyLogger::info("Entering viewPlaylist() in the Playlist data service");
         try {
             $int = (int) $playlistId;
             $stmt = $this->db->query(" SELECT s.IMAGE, s.ID, s.NAME, s.ARTIST FROM songs s 
@@ -150,8 +162,10 @@ class PlaylistDataService
             $result = $stmt->rowCount();
             if ($result != 0) {
                 $userResults = $stmt->fetchAll();
+                MyLogger::info("Playlist successfully retreived from the database, exitng viewPlaylist()");
                 return $userResults;
             } else {
+                MyLogger::warning("Zero playlist returned, exitng viewPlaylist()");
                 return null;
             }
         } catch (Exception $e2) {
@@ -169,6 +183,7 @@ class PlaylistDataService
      */
     public function addToPlaylist($playlistId, $songId)
     {
+        MyLogger::info("Entering addToPlaylist() in the Playlist data service");
         try {
             // convert ids to ints
             $playlistID = (int) $playlistId;
@@ -179,8 +194,10 @@ class PlaylistDataService
             $result = $stmt->rowCount();
             // check if a row was affected
             if ($result == 1) {
+                MyLogger::info("Song successfully added, exixitng addToPlayist()");
                 return true;
             } else {
+                MyLogger::error("Song not successfully added, exixitng addToPlayist()");
                 return false;
             }
         } catch (Exception $e2) {
@@ -196,10 +213,13 @@ class PlaylistDataService
      */
     public function deleteSong($id,$playlistid)
     {
+        MyLogger::info("Entering deleteSong() in the Playlist data service");
         try {
             // delete song based on id
             $stmt = $this->db->query("DELETE FROM `playlistsong` WHERE `songs_ID` = $id AND `playlists_ID` = $playlistid LIMIT 1");
             $result = $stmt->execute();
+            
+            MyLogger::info("Song successfully deleted, exixitng deleteSong()");
             // return bool if row was deleted
             return $result;
         } catch (Exception $e2) {
