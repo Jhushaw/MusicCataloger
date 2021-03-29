@@ -60,10 +60,12 @@ class UserController extends Controller
      */
     public function Login(Request $request)
     {
+        MyLogger::info("User loging in......... ");
         // trys to validate throws validation error if failed rules
         try {
             $this->loginValidateForm($request);
         } catch (ValidationException $e1) {
+            MyLogger::warning("Form not validated");
             throw $e1;
         }
         try {
@@ -81,17 +83,18 @@ class UserController extends Controller
             $result = $ubs->UserLogin($user);
             if ($result != null) {
                 //put user into session, return home
+                
+                MyLogger::info($userN. " Logged in ");
                 Session::put('userid', $result->getId());
                 Session::put('user', $result);
                     return view('home');
             } else {
-
-                MyLogger::warning("Username: " .$userN. " failed to login" );
-
+                MyLogger::warning("Username: " .$userN. " Password: ".$uPass. " failed to login" );
                 // back to login with fail msg
                 return view('login')->with('msg', 'Login failed please try again');
             }
         } catch (Exception $e2) {
+            MyLogger::warning("User could not login" );
             throw $e2;
         }
     }
@@ -141,6 +144,7 @@ class UserController extends Controller
     public function Logout(Request $request)
     {
         try {
+            MyLogger::info("User logging out....................");
             Session::flush();
             $request->session()->flush();
             return view("login");

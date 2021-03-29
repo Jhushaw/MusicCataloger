@@ -4,6 +4,7 @@
 // This is our own work.
 namespace App\Http\Services\DataServices;
 
+use App\Http\Services\Utility\MyLogger;
 use Exception;
 
 class SongDataService
@@ -28,6 +29,7 @@ class SongDataService
      */
     public function findAllSongs()
     {
+        MyLogger::info("Entering fingAllSongs() in the Song Data Service");
         try {
             //select all songs
             $stmt = $this->db->query("SELECT * FROM `songs`");
@@ -36,8 +38,10 @@ class SongDataService
             //check if i found anything, return them
             if ($result != 0) {
                 $userResults = $stmt->fetchAll();
+                MyLogger::info("Songs successfully found, exiting findAllSongs()");
                 return $userResults;
             } else {
+                MyLogger::warning("No songs where found, exiting findAllSongs()");
                 return null;
             }
         } catch (Exception $e2) {
