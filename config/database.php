@@ -41,8 +41,8 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '3306'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '52293'),
             'database' => env('DB_DATABASE', 'musiccataloger'),
             'username' => env('DB_USERNAME', 'azure'),
             'password' => env('DB_PASSWORD', '6#vWHD_$'),
