@@ -84,10 +84,9 @@ class UserController extends Controller
                 Session::put('user', $result);
                     return view('home');
             } else {
-<<<<<<< HEAD
+
                 MyLogger::warning("Username: " .$userN. " failed to login" );
-=======
->>>>>>> parent of ee32641 (added logging)
+
                 // back to login with fail msg
                 return view('login')->with('msg', 'Login failed please try again');
             }
