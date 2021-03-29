@@ -6,6 +6,7 @@ namespace App\Http\Services\BusinessServices;
 
 use PDO;
 use App\Http\Services\DataServices\SongDataService;
+use App\Http\Services\Utility\MyLogger;
 
 class SongBusinessService
 {
@@ -33,11 +34,14 @@ class SongBusinessService
      * @return NULL|array
      */
     public function findAllSongs(){
+        MyLogger::info("Entering findAllSongs() in the song business service");
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sds = new SongDataService($db);
         $result = $sds->findAllSongs();
         $db = null;
+        
+        MyLogger::info("Exiting findAllSongs() in the song business service");
         return $result;
         
     }

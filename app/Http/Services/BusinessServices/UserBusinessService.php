@@ -8,6 +8,7 @@ use App\Http\Models\User;
 use Exception;
 use PDO;
 use App\Http\Services\DataServices\UserDataService;
+use App\Http\Services\Utility\MyLogger;
 
 class UserBusinessService
 {
@@ -37,6 +38,8 @@ class UserBusinessService
      * @return Null|User
      */
     public function UserLogin(User $user){
+        
+            MyLogger::info("Entering UserLogin() in the user business service");
             //create connection, (best to create connection in business for atomic database transactions)
             $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -46,6 +49,7 @@ class UserBusinessService
             $result= $uds->findUser($user);
             $db = null;
             
+            MyLogger::info("Exiting UserLogin() in the user business service");
             return $result;
         
     }
@@ -57,6 +61,7 @@ class UserBusinessService
      * @return boolean
      */
     public function UserRegister(User $usr){
+        MyLogger::info("Entering UserRegister() in the user business service");
         try {
             $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -66,6 +71,7 @@ class UserBusinessService
                 $result= $uds->createUser($usr);
                 $db = null;
                 if ($result == true){
+                    MyLogger::info(" new user created, exiting UserRegister()");
                     return 1;
                 } else {
                     return 2;
