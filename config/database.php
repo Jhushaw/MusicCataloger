@@ -41,11 +41,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', 'musiccataloger.scm.azurewebsites.net/'),
-            'port' => env('DB_PORT', '52293'),
-            'database' => env('DB_DATABASE', 'musiccataloger'),
-            'username' => env('DB_USERNAME', 'azure'),
-            'password' => env('DB_PASSWORD', '6#vWHD_$'),
+            'host' => env('DB_HOST', 'vkh7buea61avxg07.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'heb5zisre34zi5lv'),
+            'username' => env('DB_USERNAME', 'pzines1fy3zvbj7e'),
+            'password' => env('DB_PASSWORD', 'ivspq3byilk4zsy9'),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
