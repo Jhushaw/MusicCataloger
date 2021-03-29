@@ -1,5 +1,4 @@
 /node_modules
-/vendor/
 /bootstrap/cache
 /public/hot
 /public/storage
