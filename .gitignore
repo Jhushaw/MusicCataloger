@@ -1,5 +1,7 @@
 /node_modules
-/bootstrap/cache
+/bootstrap/cacher
+/vendor
+vendor
 /public/hot
 /public/storage
 /storage/*.key
