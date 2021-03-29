@@ -89,7 +89,7 @@ class UserController extends Controller
                 Session::put('user', $result);
                     return view('home');
             } else {
-                MyLogger::warning("Username: " .$userN. " Password: ".$uPass. " failed to login" );
+                MyLogger::warning("Username: " .$userN. " failed to login" );
                 // back to login with fail msg
                 return view('login')->with('msg', 'Login failed please try again');
             }
