@@ -5,7 +5,6 @@
 namespace App\Http\Services\DataServices;
 
 use App\Http\Models\User;
-use App\Http\Services\Utility\MyLogger;
 use Exception;
 use PDO;
 use PDOException;
@@ -34,7 +33,6 @@ class UserDataService
      */
     public function findUser(User $user)
     {
-        MyLogger::info("Entering findUser() in the User Data Service");
         try {
             // get credentials form user object
             $username = $user->getUsername();
@@ -50,10 +48,8 @@ class UserDataService
             if ($result == 1) {
                 $resultUser = $stmt->fetch(PDO::FETCH_OBJ);
                 $returnedUser = new User($resultUser->ID, $resultUser->FIRSTNAME, $resultUser->LASTNAME, $resultUser->EMAIL, $resultUser->USERNAME, $resultUser->PASSWORD);
-                MyLogger::info("User successfully found, exiting findUser()");
                 return $returnedUser;
             } else {
-                MyLogger::info("User not found, exiting findUser()");
                 return null;
             }
         } catch (PDOException $e) {
@@ -70,7 +66,6 @@ class UserDataService
      */
     public function findUserByName($username)
     {
-        MyLogger::info("Entering findUserByName() in the User Data Service");
         try {
             // find all users where username = $username
             $stmt = $this->db->query("SELECT * FROM `users` WHERE `USERNAME` = '$username' LIMIT 1");
@@ -82,10 +77,8 @@ class UserDataService
                 // ($id,$firstName, $lastName, $email, $username, $password, $phone, $dateOfBirth, $role, $suspension)
 
                 $returned = new User($resultUser->ID, $resultUser->FIRSTNAME, $resultUser->LASTNAME, $resultUser->EMAIL, $resultUser->USERNAME, $resultUser->PASSWORD);
-                MyLogger::info("User successfully found, exiting findUserByName()");
                 return $returned;
             } else {
-                MyLogger::error("User not found, exiting findUserByName()");
                 return false;
             }
         } catch (Exception $e2) {
@@ -101,7 +94,6 @@ class UserDataService
      */
     public function createUser(User $user)
     {
-        MyLogger::info("Entering createUser() in the User Data Service");
         try {
             // get all user info
             $usrnm = $user->getUsername();
@@ -116,10 +108,8 @@ class UserDataService
             $result = $stmt->rowCount();
             // check if a row was affected
             if ($result == 1) {
-                MyLogger::info("User successfully created, exiting createUser()");
                 return true;
             } else {
-                MyLogger::info("User not created, exiting createUser()");
                 return false;
             }
         } catch (Exception $e2) {

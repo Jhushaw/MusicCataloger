@@ -7,7 +7,6 @@ namespace App\Http\Services\BusinessServices;
 use PDO;
 use App\Http\Models\Playlist;
 use App\Http\Services\DataServices\PlaylistDataService;
-use App\Http\Services\Utility\MyLogger;
 use App\Http\Models\User;
 use App\Http\Models\Song;
 
@@ -39,7 +38,6 @@ class PlaylistBusinessService
      * @return Null|bool
      */
     public function createPlaylist(Playlist $playlist){
-            MyLogger::info("Entering createPlaylist() in the playlist business service");
             //create connection
             $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -49,7 +47,6 @@ class PlaylistBusinessService
             $result = $pds->createPlaylist($playlist);
             $db = null;
             //return result
-            MyLogger::info("Exiting createPlaylist() in the playlist business service");
             return $result;
         
     }
@@ -59,7 +56,6 @@ class PlaylistBusinessService
      * @return boolean
      */
     public function deletePlaylist($id){
-        MyLogger::info("Entering deletePlaylist() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -68,8 +64,6 @@ class PlaylistBusinessService
         //get result
         $result = $pds->deletePlaylist($id);
         $db = null;
-        
-        MyLogger::info("Exiting deletePlaylist() in the playlist business service");
         //return result
         return $result;
         
@@ -81,8 +75,6 @@ class PlaylistBusinessService
      * @return boolean
      */
     public function editPlaylist(Playlist $playlist){
-        
-        MyLogger::info("Entering editPlaylist() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -91,8 +83,6 @@ class PlaylistBusinessService
         //get result
         $result = $pds->updatePlaylist($playlist);
         $db = null;
-        
-        MyLogger::info("Exiting editPlaylist() in the playlist business service");
         //return result
         return $result;
         
@@ -104,8 +94,6 @@ class PlaylistBusinessService
      * @return NULL|boolean
      */
     public function findAllPlaylists($userid){
-        
-        MyLogger::info("Entering findAllPlaylists() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -114,8 +102,6 @@ class PlaylistBusinessService
         //get result
         $result = $pbs->findAllPlaylists($userid);
         $db = null;
-        
-        MyLogger::info("Exiting findAllPlaylists() in the playlist business service");
         //return result
         return $result;
         
@@ -128,7 +114,6 @@ class PlaylistBusinessService
      */
     public function viewPlaylist($playlistID)
     {
-        MyLogger::info("Entering viewPlaylist() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -137,8 +122,6 @@ class PlaylistBusinessService
         //get result
         $result = $pds->viewPlaylist($playlistID);
         $db=null;
-        
-        MyLogger::info("Exiting viewPlaylist() in the playlist business service");
         //return result
         return $result;
     }
@@ -151,7 +134,6 @@ class PlaylistBusinessService
      */
     public function addToPlaylist($playlistId,$songId)
     {
-        MyLogger::info("Entering addToPlaylist() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -160,8 +142,6 @@ class PlaylistBusinessService
         //send ids to dao
         $results = $pds->addToPlaylist($playlistId, $songId);
         $db=null;
-        
-        MyLogger::info("Exiting addToPlaylist() in the playlist business service");
         //return boolean results
         return $results;
         
@@ -173,7 +153,6 @@ class PlaylistBusinessService
      * @return boolean
      */
     public function deleteSong($id,$playlistid){
-        MyLogger::info("Entering deleteSong() in the playlist business service");
         //create connection
         $db = new PDO("mysql:host=$this->servername;port=$this->port;dbname=$this->dbname", $this->username, $this->password);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -182,8 +161,6 @@ class PlaylistBusinessService
         //get result
         $result = $pds->deleteSong($id,$playlistid);
         $db = null;
-        
-        MyLogger::info("Exiting deleteSong() in the playlist business service");
         //return result
         return $result;
         
