@@ -41,7 +41,7 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', 'https://musiccataloger.scm.azurewebsites.net/'),
             'port' => env('DB_PORT', '52293'),
             'database' => env('DB_DATABASE', 'musiccataloger'),
             'username' => env('DB_USERNAME', 'azure'),
