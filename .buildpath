@@ -127,11 +127,6 @@
 			<attribute name="composer" value="vendor"/>
 		</attributes>
 	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/mtdowling/cron-expression/src/Cron">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/myclabs/deep-copy/src/DeepCopy">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
@@ -198,11 +193,6 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/phpunit/php-token-stream/src">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/phpunit/phpunit-mock-objects/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
@@ -378,11 +368,6 @@
 		</attributes>
 	</buildpathentry>
 	<buildpathentry kind="src" path="vendor/symfony/routing">
-		<attributes>
-			<attribute name="composer" value="vendor"/>
-		</attributes>
-	</buildpathentry>
-	<buildpathentry kind="src" path="vendor/symfony/thanks/src">
 		<attributes>
 			<attribute name="composer" value="vendor"/>
 		</attributes>
