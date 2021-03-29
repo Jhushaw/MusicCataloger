@@ -6,7 +6,7 @@
 <div class="container">
 <form action="login" method="POST">
 	<input type="hidden" name="_token" value=" <?php echo csrf_token()?>" />
-	<h2>Login</h2>
+	<h2>Login test build</h2>
 	<table>
 		<tr>
 			<td>Username</td>
