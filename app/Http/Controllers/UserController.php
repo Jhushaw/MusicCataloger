@@ -108,6 +108,7 @@ class UserController extends Controller
      */
     public function Register(Request $request)
     {
+        MyLogger::info("Entering UserController.Register() ");
         // trys to validate throws validation error if failed rules
         try {
             $this->registerValidateForm($request);
@@ -125,13 +126,17 @@ class UserController extends Controller
             // returns bool
             $result = $ubs->UserRegister($user);
             if ($result == 1){
+                MyLogger::info("Exiting UserController.Register with successfull register ");
                 return view('login')->with('msg', 'Sucessfully created an account');
             }else if($result == -2){
+                MyLogger::info("Exiting UserController.Register with username already taken ");
                 return view('register')->with('msg', "Username is taken, pick a new one :/");
             }else{
+                MyLogger::info("Exiting UserController.Register with failed Registration");
                 return view('register')->with('msg', "Failed to create account");
             }
         } catch (Exception $e2) {
+            MyLogger::warning("Exiting UserController.Register exception");
             throw $e2;
         }
     }
