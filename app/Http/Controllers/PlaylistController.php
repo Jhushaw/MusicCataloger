@@ -84,6 +84,7 @@ class PlaylistController extends Controller
     public function editPlaylistView(Request $request)
     {
         try {
+            //testing build pipeline
             MyLogger::info("Entering editPlaylistView() in the playlist controller");
             // get id and name
             $id = $request->input('id');
