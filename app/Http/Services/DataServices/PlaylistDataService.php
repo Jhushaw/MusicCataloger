@@ -231,6 +231,7 @@ class PlaylistDataService
         } catch (Exception $e2) {
             MyLogger::error("Global Exception error in PlaylistDataService.deleteSong");
             throw $e2;
+            //testing ci/cd build
         }
     }
 }
