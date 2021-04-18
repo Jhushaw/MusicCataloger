@@ -57,6 +57,7 @@ class UserDataService
                 return null;
             }
         } catch (PDOException $e) {
+            MyLogger::error("PDO Exception error in UserDataService.findUser");
             throw $e;
         }
     }
@@ -89,6 +90,7 @@ class UserDataService
                 return false;
             }
         } catch (Exception $e2) {
+            MyLogger::error("PDO Exception error in UserDataService.findUserByName");
             throw $e2;
         }
     }
@@ -123,6 +125,7 @@ class UserDataService
                 return false;
             }
         } catch (Exception $e2) {
+            MyLogger::error("PDO Exception error in UserDataService.createUser");
             throw $e2;
         }
     }

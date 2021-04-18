@@ -45,6 +45,7 @@ class SongDataService
                 return null;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in SongDataService.findAllSongs");
             throw $e2;
         }
     }

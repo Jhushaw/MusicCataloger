@@ -154,6 +154,7 @@ class UserController extends Controller
             $request->session()->flush();
             return view("login");
         } catch (Exception $e2) {
+            MyLogger::info("global error exception in UserController.Logout");
             throw $e2;
         }
     }

@@ -52,6 +52,7 @@ class PlaylistDataService
                 return false;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.createPlaylist");
             throw $e2;
         }
     }
@@ -74,6 +75,7 @@ class PlaylistDataService
             MyLogger::info("Playlist successfully deleted, exiting, deletePlaylist()");
             return $result;
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.deletePlaylist");
             throw $e2;
         }
     }
@@ -108,6 +110,7 @@ class PlaylistDataService
                 return false;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.deleteSong");
             throw $e2;
         }
     }
@@ -138,6 +141,7 @@ class PlaylistDataService
                 return null;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.findAllPlaylists");
             throw $e2;
         }
     }
@@ -169,6 +173,7 @@ class PlaylistDataService
                 return null;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.viewPlaylist");
             throw $e2;
         }
     }
@@ -201,6 +206,7 @@ class PlaylistDataService
                 return false;
             }
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.addToPlaylist");
             throw $e2;
         }
     }
@@ -223,6 +229,7 @@ class PlaylistDataService
             // return bool if row was deleted
             return $result;
         } catch (Exception $e2) {
+            MyLogger::error("Global Exception error in PlaylistDataService.deleteSong");
             throw $e2;
         }
     }
